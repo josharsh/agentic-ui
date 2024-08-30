@@ -1,0 +1,7 @@
+version: '3'
+services:
+  falcon:
+    build: .
+    ports:
+      - "3211:3211"
+    restart: always

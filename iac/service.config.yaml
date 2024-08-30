@@ -1,0 +1,18 @@
+# Please DO NOT change the value inside reservedSecrets key.
+config:
+  default:
+    # TO_CHANGE: change the serviceName and port
+    serviceName: assessment-portal
+    bu: central
+    port: 3210
+  environment:
+    dev:
+      # TO_CHANGE: change the cpu, memory, limits, secretsWildcard, BU, api host, api path based on your service
+      cpu: 256
+      memory: 512
+      secretsWildcard: /qoala/dev/app/falcon-eye-web
+    prod:
+      # TO_CHANGE: change the cpu, memory, limits, secretsWildcard, BU, api host, api path based on your service
+      cpu: 256
+      memory: 512
+      secretsWildcard: /qoala/prod/app/falcon-eye-web
