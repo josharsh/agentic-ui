@@ -20,7 +20,7 @@ function ProfilePage() {
         <Avatar
           size="8"
           src={user.avatar || `https://ui-avatars.com/api/?name=${user.first_name}+${user.last_name}`}
-          fallback={`${user.first_name[0]}${user.last_name[0]}`}
+          fallback={`${user.username}`}
         />
         <Heading size="6">{user.first_name} {user.last_name}</Heading>
         <Text size="3" color="gray">{user.email}</Text>

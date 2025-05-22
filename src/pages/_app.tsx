@@ -54,7 +54,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>Falcon Eye</title>
+        <title>DDIY</title>
         <meta name="description" content="" />
       </Head>
       <Theme accentColor={theme}>

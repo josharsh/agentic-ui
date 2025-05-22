@@ -88,7 +88,7 @@ export default function Signup() {
               <Container>
                 <Flex gap="4" direction={"column"} align={"center"}>
                   <Heading weight={"bold"} align={"center"}>
-                    {t("Welcome Back to Agentic")}
+                    {t("Welcome Back to Agentic - AI Teams")}
                   </Heading>
                   <Text size={"3"} className="text-center text-gray-600">
                     {t("Sign in to your account")}

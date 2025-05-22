@@ -6,7 +6,7 @@ import {
   AWS_S3_BUCKET_NAME,
   AWS_SECRET_KEY,
 } from "@/constants/config";
-import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
+import { ChatBubbleIcon, MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import {
   Avatar,
   Badge,
@@ -19,6 +19,7 @@ import {
 import AWS from "aws-sdk";
 import LanguageSwitcher from "./common/language-switcher";
 import { useTranslation } from "react-i18next";
+import { BatteryIcon, BellRingIcon, BrainCircuitIcon, BrainCogIcon, BrainIcon, ConciergeBellIcon, CpuIcon, LucideBellElectric, LucideBrain } from "lucide-react";
 
 AWS.config.update({
   credentials: new AWS.Credentials(AWS_ACCESS_KEY, AWS_SECRET_KEY),
@@ -97,11 +98,11 @@ function Header() {
   }
 
   return (
-    <div className="flex h-1/5 items-center justify-between border-b-2 border-slate-200 px-8 py-3">
+    <div className="flex h-1/5 items-center justify-between border-b-2 border-slate-200 px-8 py-3 bg-gradient-to-b from-blue-200">
       {user?.meta_data?.logo ? (
         <img src={user?.meta_data?.logo?.src} alt="insurer" />
       ) : (
-        <SwissFrancIcon height="24" width="24" className="text-blue-600" />
+        <CpuIcon height="28" width="28" className="text-blue-600" />
       )}
       <Dialog.Root>
         <Dialog.Trigger color="indigo">

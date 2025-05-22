@@ -1,8 +1,22 @@
-/* global qoala */
 import axios from "axios";
 import Qs from "qs";
-
 import apiEndpoints from "./apiEndpoints";
+
+/**
+ * Safely retrieves the access token from localStorage.
+ * @returns {string|null} The access token, or null if not found.
+ */
+export function getAccessToken() {
+  if (typeof window === "undefined") return null;
+  try {
+    const userData = localStorage.getItem("user_data");
+    if (!userData) return null;
+    const parsed = JSON.parse(userData);
+    return parsed?.access_token || null;
+  } catch {
+    return null;
+  }
+}
 
 const api = {
   session: {
@@ -12,13 +26,11 @@ const api = {
     updateFileRemark: (fileId, params) => {
       const config = {
         headers: {
-          Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem("user_data"))?.access_token
-          }`,
+          Authorization: `Bearer ${getAccessToken()}`,
         },
       };
       return axios
-        .patch(`${apiEndpoints.fileRemark}/${fileId}/remark`, params, config)
+        .patch(`${apiEndpoints.fileRemark}/${fileId}/remark`, params, config);
     },
 
     deleteTaggedFile: (id) =>
@@ -39,27 +51,23 @@ const api = {
         )
         .then((res) => res.data),
 
-      getReportsData: (params) => {
-          const config = {
-            headers: {
-              Authorization: `Bearer ${
-                JSON.parse(localStorage.getItem("user_data"))?.access_token
-              }`,
-            },
-            params,
-            paramsSerializer: function (params) {
-              return Qs.stringify(params, { indices: false });
-            },
-          };
-          return axios.get(apiEndpoints.caseInfo, config).then((res) => res.data);
+    getReportsData: (params) => {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${getAccessToken()}`,
         },
+        params,
+        paramsSerializer: function (params) {
+          return Qs.stringify(params, { indices: false });
+        },
+      };
+      return axios.get(apiEndpoints.caseInfo, config).then((res) => res.data);
+    },
 
     getSessions: (params) => {
       const config = {
         headers: {
-          Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem("user_data"))?.access_token
-          }`,
+          Authorization: `Bearer ${getAccessToken()}`,
         },
         params,
         paramsSerializer: function (params) {
@@ -71,9 +79,7 @@ const api = {
     getSession: (id) => {
       const config = {
         headers: {
-          Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem("user_data"))?.access_token
-          }`,
+          Authorization: `Bearer ${getAccessToken()}`,
         },
       };
       return axios
@@ -97,9 +103,7 @@ const api = {
     getPromptDetails: () => {
       const config = {
         headers: {
-          Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem("user_data"))?.access_token
-          }`,
+          Authorization: `Bearer ${getAccessToken()}`,
         },
       };
       return axios.get(apiEndpoints.prompt, config).then((res) => res.data);
@@ -107,9 +111,7 @@ const api = {
     getOrganizationUsers: () => {
       const config = {
         headers: {
-          Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem("user_data"))?.access_token
-          }`,
+          Authorization: `Bearer ${getAccessToken()}`,
         },
       };
       return axios.get(apiEndpoints.organizationUsers, config).then((res) => res.data);
@@ -117,9 +119,7 @@ const api = {
     inviteUser: (params) => {
       const config = {
         headers: {
-          Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem("user_data"))?.access_token
-          }`,
+          Authorization: `Bearer ${getAccessToken()}`,
         },
       };
       return axios.post(apiEndpoints.inviteUser, params, config).then((res) => res.data);
@@ -127,20 +127,16 @@ const api = {
     getUserDetails: () => {
       const config = {
         headers: {
-          Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem("user_data"))?.access_token
-          }`,
+          Authorization: `Bearer ${getAccessToken()}`,
         },
       };
-      return axios.get(apiEndpoints.user, config).then((res) => {return res.data})
-      .catch((err) => {console.error(err); return err});
+      return axios.get(apiEndpoints.user, config).then((res) => res.data)
+        .catch((err) => { console.error(err); return err; });
     },
     getDocumentsDetails: () => {
       const config = {
         headers: {
-          Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem("user_data"))?.access_token
-          }`,
+          Authorization: `Bearer ${getAccessToken()}`,
         },
       };
       return axios.get(apiEndpoints.document, config).then((res) => res.data);
@@ -149,9 +145,7 @@ const api = {
     linkPromptsToOrg: (params, id) => {
       const config = {
         headers: {
-          Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem("user_data"))?.access_token
-          }`,
+          Authorization: `Bearer ${getAccessToken()}`,
         },
       };
       return axios
@@ -162,9 +156,7 @@ const api = {
     linkDocumentsToOrg: (params) => {
       const config = {
         headers: {
-          Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem("user_data"))?.access_token
-          }`,
+          Authorization: `Bearer ${getAccessToken()}`,
         },
       };
       return axios
@@ -174,9 +166,7 @@ const api = {
     updateSessionStatus: (id, params) => {
       const config = {
         headers: {
-          Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem("user_data"))?.access_token
-          }`,
+          Authorization: `Bearer ${getAccessToken()}`,
         },
       };
       return axios
@@ -187,9 +177,7 @@ const api = {
     updateCaseStage: (id, params) => {
       const config = {
         headers: {
-          Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem("user_data"))?.access_token
-          }`,
+          Authorization: `Bearer ${getAccessToken()}`,
         },
       };
       return axios
